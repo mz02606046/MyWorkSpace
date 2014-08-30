@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    <struts> 
+	<constant name="struts.multipart.maxSize" value="999999999"/>
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+     <!-- 基本的配置内容 --> 
+
+	<package name="default" extends="struts-default">
+        <global-results>
+            <result name="error">/error.jsp</result>
+            <result name="exception">/exception.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping result="error" exception="java.lang.Exception"></exception-mapping>
+            <exception-mapping result="error" exception="java.sql.SQLException"></exception-mapping>
+        </global-exception-mappings>
+     </package>
+
+	<package name="strust" extends="default" namespace="/bg">
+     	<!-- 用户 -->
+     	<action name="query" class="queryAction" > 
+     		<result name="loginSuccess">../index.jsp</result>
+     	   <result name="loginFail">../login.jsp</result>
+     	   <result name="loginOut">../login.jsp</result>
+     	   <result name="password">system/password.jsp</result>
+     	   <result name="accountList">query/account.jsp</result>
+     	    <result name="applyList">query/apply.jsp</result>
+     	    <result name="userip">query/userip.jsp</result>
+     	     <result name="statistics">query/statistics.jsp</result>
+     	      <result name="selUserIntegral">query/userintegral.jsp</result>
+	     </action> 
+	 
+	      <action name="operate" class="operateAction" > 
+     	      <result name="selNotice">operation/notice.jsp</result>
+     	      <result name="selIp">query/ip.jsp</result>
+     	      <result name="goAddOrUpdateIp">operation/ip.jsp</result>
+	     </action> 
+	      
+     </package>
+
+
+     <package name="json" extends="json-default" namespace="/in">
+     
+     		<action name="login" class="loginAction"  >
+     			<result type="json" name="success" >
+					<param name="root">map</param>
+				</result>
+     		</action>
+     		
+     		<action name="register" class="registerAction"  >
+     			<result type="json" name="success" >
+					<param name="root">map</param>
+				</result>
+     		</action>
+
+			<action name="sms" class="smsAction"  >
+     			<result type="json" name="success" >
+					<param name="root">map</param>
+				</result>
+     		</action>
+     		
+     		<action name="general" class="generalAction"  >
+     			<result type="json" name="success" >
+					<param name="root">map</param>
+				</result>
+     		</action>
+     		
+     		
+     </package>
+    </struts> 
